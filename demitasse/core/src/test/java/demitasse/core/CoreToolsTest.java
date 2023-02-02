@@ -26,11 +26,20 @@ import static demitasse.core.CoreTools.isEmpty;
 import static demitasse.core.CoreTools.method;
 import static demitasse.core.CoreTools.object;
 import static demitasse.core.CoreTools.suppressAccessControl;
+import static demitasse.core.CoreTools.toBoolean;
+import static demitasse.core.CoreTools.toByte;
+import static demitasse.core.CoreTools.toCharacter;
 import static demitasse.core.CoreTools.toClass;
+import static demitasse.core.CoreTools.toDouble;
+import static demitasse.core.CoreTools.toFloat;
+import static demitasse.core.CoreTools.toInteger;
+import static demitasse.core.CoreTools.toLong;
+import static demitasse.core.CoreTools.toShort;
 import static demitasse.core.CoreTools.truePredicate;
 import static demitasse.core.CoreTools.type;
 import static demitasse.core.CoreTools.validate;
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -157,6 +166,82 @@ public final class CoreToolsTest {
         assertEquals(int.class, toClass(int.class.getName()));
 
         assertEquals(ClassNotFoundException.class.getName() + ": 0", assertThrows(CoreException.class, () -> toClass("0")).getMessage());
+    }
+
+    @Test
+    public void test_toString() {
+        assertNull(CoreTools.toString(null));
+        assertEquals(String.valueOf(object), CoreTools.toString(object));
+    }
+
+    @Test
+    public void test_toBoolean() {
+        assertNull(toBoolean(null));
+        assertTrue(toBoolean(TRUE));
+        assertFalse(toBoolean(""));
+        assertTrue(toBoolean("TrUe"));
+    }
+
+    @Test
+    public void test_toByte() {
+        assertNull(toByte(null));
+        assertNull(toByte(""));
+        assertEquals((byte) 1, toByte((byte) 1));
+        assertEquals((byte) 1, toByte(1));
+        assertEquals((byte) 1, toByte("1"));
+    }
+
+    @Test
+    public void test_toCharacter() {
+        assertNull(toCharacter(null));
+        assertNull(toCharacter(""));
+        assertEquals('1', toCharacter('1'));
+        assertEquals('1', toCharacter("123"));
+    }
+
+    @Test
+    public void test_toShort() {
+        assertNull(toShort(null));
+        assertNull(toShort(""));
+        assertEquals((short) 1, toShort((short) 1));
+        assertEquals((short) 1, toShort(1));
+        assertEquals((short) 1, toShort("1"));
+    }
+
+    @Test
+    public void test_toInteger() {
+        assertNull(toInteger(null));
+        assertNull(toInteger(""));
+        assertEquals(1, toInteger(1));
+        assertEquals(1, toInteger(1L));
+        assertEquals(1, toInteger("1"));
+    }
+
+    @Test
+    public void test_toLong() {
+        assertNull(toLong(null));
+        assertNull(toLong(""));
+        assertEquals(1L, toLong(1L));
+        assertEquals(1L, toLong(1));
+        assertEquals(1L, toLong("1"));
+    }
+
+    @Test
+    public void test_toFloat() {
+        assertNull(toFloat(null));
+        assertNull(toFloat(""));
+        assertEquals(1.0f, toFloat(1.0f));
+        assertEquals(1.0f, toFloat(1));
+        assertEquals(1.0f, toFloat("1"));
+    }
+
+    @Test
+    public void test_toDouble() {
+        assertNull(toDouble(null));
+        assertNull(toDouble(""));
+        assertEquals(1.0, toDouble(1.0));
+        assertEquals(1.0, toDouble(1));
+        assertEquals(1.0, toDouble("1"));
     }
 
     @Test

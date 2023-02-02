@@ -173,6 +173,115 @@ public final class CoreTools {
     }
 
     /**
+     * @param object object
+     * @return string
+     */
+    public static String toString(Object object) {
+        return object == null ? null : String.valueOf(object);
+    }
+
+    /**
+     * @param object object
+     * @return boolean
+     */
+    public static Boolean toBoolean(Object object) {
+        if (object == null) return null;
+        if (object instanceof Boolean value) return value;
+        String s = String.valueOf(object);
+        return Boolean.parseBoolean(s);
+    }
+
+    /**
+     * @param object object
+     * @return byte
+     */
+    public static Byte toByte(Object object) {
+        if (object == null) return null;
+        if (object instanceof Byte value) return value;
+        if (object instanceof Number value) return value.byteValue();
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return Byte.parseByte(s);
+    }
+
+    /**
+     * @param object object
+     * @return character
+     */
+    public static Character toCharacter(Object object) {
+        if (object == null) return null;
+        if (object instanceof Character value) return value;
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return s.charAt(0);
+    }
+
+    /**
+     * @param object object
+     * @return short
+     */
+    public static Short toShort(Object object) {
+        if (object == null) return null;
+        if (object instanceof Short value) return value;
+        if (object instanceof Number value) return value.shortValue();
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return Short.parseShort(s);
+    }
+
+    /**
+     * @param object object
+     * @return integer
+     */
+    public static Integer toInteger(Object object) {
+        if (object == null) return null;
+        if (object instanceof Integer value) return value;
+        if (object instanceof Number value) return value.intValue();
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return Integer.parseInt(s);
+    }
+
+    /**
+     * @param object object
+     * @return long
+     */
+    public static Long toLong(Object object) {
+        if (object == null) return null;
+        if (object instanceof Long value) return value;
+        if (object instanceof Number value) return value.longValue();
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return Long.parseLong(s);
+    }
+
+    /**
+     * @param object object
+     * @return float
+     */
+    public static Float toFloat(Object object) {
+        if (object == null) return null;
+        if (object instanceof Float value) return value;
+        if (object instanceof Number value) return value.floatValue();
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return Float.parseFloat(s);
+    }
+
+    /**
+     * @param object object
+     * @return double
+     */
+    public static Double toDouble(Object object) {
+        if (object == null) return null;
+        if (object instanceof Double value) return value;
+        if (object instanceof Number value) return value.doubleValue();
+        String s = String.valueOf(object);
+        if (isEmpty(s)) return null;
+        return Double.parseDouble(s);
+    }
+
+    /**
      * @param type type
      * @param name name
      * @return field
