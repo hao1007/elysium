@@ -16,6 +16,7 @@ subprojects {
     val depJunitJupiterApi by extra("org.junit.jupiter:junit-jupiter-api:${verJunitJupiter}")
     val depJunitJupiterEngine by extra("org.junit.jupiter:junit-jupiter-engine:${verJunitJupiter}")
     val depMockitoCore by extra("org.mockito:mockito-core:${verMockito}")
+    val depMockitoJunitJupiter by extra("org.mockito:mockito-junit-jupiter:${verMockito}")
 
     val testImplementation by configurations
     val testRuntimeOnly by configurations
@@ -23,6 +24,7 @@ subprojects {
     dependencies {
         testImplementation(depJunitJupiterApi)
         testImplementation(depMockitoCore)
+        testImplementation(depMockitoJunitJupiter)
         testRuntimeOnly(depJunitJupiterEngine)
     }
 
