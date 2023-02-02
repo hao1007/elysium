@@ -12,6 +12,7 @@ import static demitasse.core.CoreConstants.EMPTY_CLASSES;
 import static demitasse.core.CoreConstants.EMPTY_OBJECTS;
 import static demitasse.core.CoreConstants.EMPTY_STRINGS;
 import static demitasse.core.CoreConstants.EQUAL;
+import static demitasse.core.CoreConstants.HYPHEN;
 import static demitasse.core.CoreConstants.INSTANCE_ENUM;
 import static demitasse.core.CoreConstants.INSTANCE_FIELD;
 import static demitasse.core.CoreConstants.INSTANCE_METHOD;
@@ -40,6 +41,7 @@ public final class CoreConstantsTest {
         assertArrayEquals(new String[0], EMPTY_STRINGS);
         assertEquals("", EMPTY);
         assertEquals("=", EQUAL);
+        assertEquals("-", HYPHEN);
         assertEquals(",", COMMA);
     }
 }

@@ -18,6 +18,7 @@ public final class CoreConstants {
     public static final String[] EMPTY_STRINGS = {};
     public static final String EMPTY = "";
     public static final String EQUAL = "=";
+    public static final String HYPHEN = "-";
     public static final String COMMA = ",";
 
     //
