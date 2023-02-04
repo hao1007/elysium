@@ -3,9 +3,11 @@ plugins {
 }
 
 val depJunitJupiterApi: String by extra
-val depMockitoCore: String by extra
 
 dependencies {
     testFixturesImplementation(depJunitJupiterApi)
-    testFixturesImplementation(depMockitoCore)
+}
+
+tasks.withType<Test> {
+    systemProperty("demitasse.core.CoreToolsTest.load_key", "demitasse.core.CoreToolsTest\$EB")
 }

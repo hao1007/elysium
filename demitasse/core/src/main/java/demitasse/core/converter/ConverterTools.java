@@ -37,7 +37,7 @@ public final class ConverterTools {
 
         @Override
         public Class<T> outputType() {
-            return type;
+            return type();
         }
 
         @Override

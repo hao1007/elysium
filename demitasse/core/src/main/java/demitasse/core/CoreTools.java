@@ -12,6 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.ServiceConfigurationError;
+import java.util.ServiceLoader;
+import java.util.ServiceLoader.Provider;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -22,6 +25,7 @@ import static demitasse.core.CoreConstants.EMPTY_OBJECTS;
 import static demitasse.core.CoreConstants.INSTANCE_ENUM;
 import static demitasse.core.CoreConstants.INSTANCE_FIELD;
 import static demitasse.core.CoreConstants.INSTANCE_METHOD;
+import static java.lang.System.getProperty;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.function.Function.identity;
 import static java.util.function.Predicate.not;
@@ -404,6 +408,36 @@ public final class CoreTools {
             for (Class<?> ic : t.getInterfaces()) list.add(i++, ic);
         }
         return null;
+    }
+
+    /**
+     * @param key      key
+     * @param type     type
+     * @param supplier supplier
+     * @return service
+     */
+    public static <T> T load(String key, Class<T> type, Supplier<? extends T> supplier) {
+        if (!isBlank(key)) {
+            String name = getProperty(key);
+            if (!isBlank(name)) return instance(type(name));
+        }
+        Map<Class<? extends T>, T> map = null;
+        if (type != null) {
+            try {
+                ServiceLoader<T> loader = ServiceLoader.load(type);
+                map = loader.stream().collect(toMap(Provider::type, Provider::get));
+            } catch (ServiceConfigurationError e) {
+                e.printStackTrace();
+            }
+        }
+        if (isEmpty(map)) {
+            return supplier == null ? null : supplier.get();
+        } else if (map.size() == 1) {
+            return map.values().iterator().next();
+        } else {
+            List<String> list = map.keySet().stream().map(Class::getName).sorted().toList();
+            throw new CoreException("multiple implementations: " + list);
+        }
     }
 
     /**

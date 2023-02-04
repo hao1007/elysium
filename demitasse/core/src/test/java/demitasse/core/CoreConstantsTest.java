@@ -11,13 +11,16 @@ import static demitasse.core.CoreConstants.EMPTY;
 import static demitasse.core.CoreConstants.EMPTY_CLASSES;
 import static demitasse.core.CoreConstants.EMPTY_OBJECTS;
 import static demitasse.core.CoreConstants.EMPTY_STRINGS;
+import static demitasse.core.CoreConstants.EOL;
 import static demitasse.core.CoreConstants.EQUAL;
 import static demitasse.core.CoreConstants.HYPHEN;
 import static demitasse.core.CoreConstants.INSTANCE_ENUM;
 import static demitasse.core.CoreConstants.INSTANCE_FIELD;
 import static demitasse.core.CoreConstants.INSTANCE_METHOD;
 import static demitasse.core.CoreConstants.NULL;
+import static demitasse.core.CoreConstants.SPACE;
 import static demitasse.core.CoreConstants.UNSPECIFIED;
+import static java.lang.System.lineSeparator;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public final class CoreConstantsTest {
     @Test
     public void test() {
+        assertEquals(lineSeparator(), EOL);
         assertEquals("__UNSPECIFIED__", UNSPECIFIED);
         assertEquals("null", NULL);
         assertEquals("Instance", INSTANCE_ENUM);
@@ -40,6 +44,7 @@ public final class CoreConstantsTest {
         assertArrayEquals(new Class<?>[0], EMPTY_CLASSES);
         assertArrayEquals(new String[0], EMPTY_STRINGS);
         assertEquals("", EMPTY);
+        assertEquals(" ", SPACE);
         assertEquals("=", EQUAL);
         assertEquals("-", HYPHEN);
         assertEquals(",", COMMA);

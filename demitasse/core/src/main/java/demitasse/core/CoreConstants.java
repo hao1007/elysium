@@ -4,6 +4,7 @@ package demitasse.core;
  * CoreConstants
  */
 public final class CoreConstants {
+    public static final String EOL = System.lineSeparator();
     public static final String UNSPECIFIED = "__UNSPECIFIED__";
     public static final String NULL = "null";
     public static final String INSTANCE_ENUM = "Instance";
@@ -17,6 +18,7 @@ public final class CoreConstants {
     public static final Class<?>[] EMPTY_CLASSES = {};
     public static final String[] EMPTY_STRINGS = {};
     public static final String EMPTY = "";
+    public static final String SPACE = " ";
     public static final String EQUAL = "=";
     public static final String HYPHEN = "-";
     public static final String COMMA = ",";

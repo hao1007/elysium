@@ -23,6 +23,7 @@ import static demitasse.core.CoreTools.field;
 import static demitasse.core.CoreTools.inspect;
 import static demitasse.core.CoreTools.instance;
 import static demitasse.core.CoreTools.isEmpty;
+import static demitasse.core.CoreTools.load;
 import static demitasse.core.CoreTools.method;
 import static demitasse.core.CoreTools.object;
 import static demitasse.core.CoreTools.suppressAccessControl;
@@ -323,8 +324,21 @@ public final class CoreToolsTest {
         assertEquals(CA.class, inspect(CB.class, o -> o == CA.class ? new DefaultInspectionResult<>(o) : new DefaultInspectionResult<>(false, null)));
     }
 
+    @Test
+    public void test_load() {
+        assertNull(load(null, null, null));
+        assertEquals(object, load(null, null, () -> object));
+
+        assertNull(load("demitasse.core.CoreToolsTest", null, null));
+        assertEquals(EB.Instance, load("demitasse.core.CoreToolsTest.load_key", null, null));
+
+        assertTrue(load(null, CA.class, null) instanceof CB);
+        assertNull(load(null, CC.class, null));
+        assertEquals("multiple implementations: [demitasse.core.CoreToolsTest$CA, demitasse.core.CoreToolsTest$CB]", assertThrows(CoreException.class, () -> load(null, IA.class, null)).getMessage());
+    }
+
     //
-    private interface IA {
+    public interface IA {
     }
 
     //
@@ -336,10 +350,13 @@ public final class CoreToolsTest {
     }
 
     //
-    private static class CA implements IA {
+    public static class CA implements IA {
         private static final CA INSTANCE = new CA();
         public Object fa0;
         private Object fa1;
+
+        public CA() {
+        }
 
         public void ma0() {
         }
@@ -349,8 +366,11 @@ public final class CoreToolsTest {
     }
 
     //
-    private static class CB extends CA implements IA {
+    public static class CB extends CA implements IA {
         private static final CB cb = new CB(null);
+
+        public CB() {
+        }
 
         private CB(Object object) {
         }
